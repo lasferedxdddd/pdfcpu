@@ -32,7 +32,7 @@ func TestWritePagesDictRejectsRecursionDepth(t *testing.T) {
 	}
 
 	pageNr := 0
-	_, _, err = writePagesDictDepth(ctx, types.NewIndirectRef(1, 0), &pageNr, ctx.XRefTable.MaxRecursionDepth()+1)
+	_, _, err = writePagesDictDepth(ctx, types.NewIndirectRef(1, 0), &pageNr, ctx.XRefTable.MaxRecursionDepth()+1, model.NewPageTreeVisit())
 	if !errors.Is(err, model.ErrMaxRecursionDepthExceeded) {
 		t.Fatalf("got %v, want ErrMaxRecursionDepthExceeded", err)
 	}
